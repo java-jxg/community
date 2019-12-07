@@ -1,4 +1,4 @@
-package com.fastcase.community.community.controller;
+package com.fastcase.community.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

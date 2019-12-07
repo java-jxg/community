@@ -1,8 +1,8 @@
-package com.fastcase.community.community.controller;
+package com.fastcase.community.controller;
 
-import com.fastcase.community.community.dto.AccessTokenDTO;
-import com.fastcase.community.community.dto.GithubUser;
-import com.fastcase.community.community.provider.GithubProvider;
+import com.fastcase.community.dto.AccessTokenDTO;
+import com.fastcase.community.dto.GithubUser;
+import com.fastcase.community.provider.GithubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

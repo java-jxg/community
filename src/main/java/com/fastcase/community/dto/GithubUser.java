@@ -1,4 +1,4 @@
-package com.fastcase.community.community.dto;
+package com.fastcase.community.dto;
 
 public class GithubUser {
     private String name;

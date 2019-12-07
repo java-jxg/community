@@ -1,4 +1,4 @@
-package com.fastcase.community.community;
+package com.fastcase.community;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,8 @@
-package com.fastcase.community.community.provider;
+package com.fastcase.community.provider;
 
 import com.alibaba.fastjson.JSON;
-import com.fastcase.community.community.dto.AccessTokenDTO;
-import com.fastcase.community.community.dto.GithubUser;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fastcase.community.dto.AccessTokenDTO;
+import com.fastcase.community.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
