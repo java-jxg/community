@@ -5,6 +5,8 @@ import com.fastcase.community.mapper.QuestionMapper;
 import com.fastcase.community.mapper.UserMapper;
 import com.fastcase.community.model.Question;
 import com.fastcase.community.model.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,12 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> list() {
-        List<Question> questions = questionMapper.list();
+    public PageInfo list(Integer page, Integer size) {
+
+        PageHelper.startPage(page,size);
+        List<QuestionDTO> questions = questionMapper.list();
+/*
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             User user = userMapper.findById(question.getCreator());
@@ -29,7 +35,8 @@ public class QuestionService {
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
-        }
-        return questionDTOList;
+        }*/
+        PageInfo<Question> pageInfo = new PageInfo(questions,5);
+        return pageInfo;
     }
 }

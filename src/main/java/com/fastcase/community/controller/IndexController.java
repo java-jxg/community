@@ -4,6 +4,7 @@ import com.fastcase.community.dto.QuestionDTO;
 import com.fastcase.community.mapper.UserMapper;
 import com.fastcase.community.model.User;
 import com.fastcase.community.service.QuestionService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,9 @@ public class IndexController {
     private QuestionService questionService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request,Model model){
+    public String index(HttpServletRequest request,Model model,
+                        @RequestParam(name="page",defaultValue = "1") Integer page,
+                        @RequestParam(name="size",defaultValue = "2") Integer size){
         Cookie[] cookies = request.getCookies();
         if(cookies != null){
             for (Cookie cookie : cookies) {
@@ -36,8 +39,8 @@ public class IndexController {
                 }
             }
         }
-        List<QuestionDTO> questionList = questionService.list();
-        model.addAttribute("questions", questionList);
+        PageInfo questionlist = questionService.list(page, size);
+        model.addAttribute("questionlist", questionlist);
         return "index";
     }
 
