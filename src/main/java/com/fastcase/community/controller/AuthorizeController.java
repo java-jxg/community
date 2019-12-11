@@ -5,6 +5,7 @@ import com.fastcase.community.dto.GithubUser;
 import com.fastcase.community.mapper.UserMapper;
 import com.fastcase.community.model.User;
 import com.fastcase.community.provider.GithubProvider;
+import com.fastcase.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,8 @@ public class AuthorizeController {
     @Value("${github.redirect.url}")
     public String clientUrl;
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
+
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
@@ -45,21 +47,30 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
 
-        GithubUser githubUseruser = githubProvider.getUser(accessToken);
-        if(githubUseruser != null){
+        GithubUser githubUser = githubProvider.getUser(accessToken);
+        if (githubUser != null && githubUser.getId() != null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setName(githubUseruser.getName());
-            user.setAccountId(String.valueOf(githubUseruser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            user.setAvatarUrl(githubUseruser.getAvatarUrl());
-            userMapper.insert(user);
-            response.addCookie(new Cookie("token",token));
+            user.setName(githubUser.getName());
+            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setAvatarUrl(githubUser.getAvatarUrl());
+            userService.createOrUpdate(user);
+            response.addCookie(new Cookie("token", token));
             return "redirect:/";
-        }else{
+        } else {
+            // 登录失败，重新登录
             return "redirect:/";
         }
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response) {
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
+    }
+
 }
