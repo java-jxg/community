@@ -1,25 +1,31 @@
 package com.fastcase.community.model;
 
-import lombok.Data;
-
-
 public class Question {
-    private Integer id;
+    private Long id;
+
     private String title;
-    private String description;
+
     private Long gmtCreate;
+
     private Long gmtModified;
+
     private Integer creator;
+
     private Integer commentCount;
+
     private Integer viewCount;
+
     private Integer likeCount;
+
     private String tag;
 
-    public Integer getId() {
+    private String description;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -28,15 +34,7 @@ public class Question {
     }
 
     public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        this.title = title == null ? null : title.trim();
     }
 
     public Long getGmtCreate() {
@@ -92,6 +90,14 @@ public class Question {
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        this.tag = tag == null ? null : tag.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

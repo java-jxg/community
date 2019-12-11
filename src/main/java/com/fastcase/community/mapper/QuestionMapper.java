@@ -1,27 +1,40 @@
 package com.fastcase.community.mapper;
 
 import com.fastcase.community.dto.QuestionDTO;
-import com.fastcase.community.model.Question;
-import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-@Mapper
-public interface QuestionMapper {
-    @Insert("insert into question (title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag})")
-    void create(Question question);
-    @Select("SELECT * FROM question q \n" +
-            "LEFT JOIN USER u ON q.creator=u.id\n")
-    List<QuestionDTO> list();
-    @Select("SELECT * FROM question q\n" +
-            "LEFT JOIN USER u ON q.creator=u.id\n" +
-            "WHERE creator = #{userId}")
-    List<QuestionDTO> listByUserId(@Param("userId") Integer userId);
-    @Select("SELECT * FROM question q\n" +
-            "LEFT JOIN USER u ON q.creator=u.id\n" +
-            "WHERE q.id = #{id}")
-    QuestionDTO getById(@Param("id") Integer id);
+import com.fastcase.community.model.Question;
+import com.fastcase.community.model.QuestionExample;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
-    @Update("update question set title = #{title}, description = #{description}, gmt_modified = #{gmtModified}, tag = #{tag} where id = #{id}")
-    void update(Question question);
+public interface QuestionMapper {
+    int countByExample(QuestionExample example);
+
+    int deleteByExample(QuestionExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Question record);
+
+    int insertSelective(Question record);
+
+    List<Question> selectByExampleWithBLOBs(QuestionExample example);
+
+    List<Question> selectByExample(QuestionExample example);
+
+    Question selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Question record, @Param("example") QuestionExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") Question record, @Param("example") QuestionExample example);
+
+    int updateByExample(@Param("record") Question record, @Param("example") QuestionExample example);
+
+    int updateByPrimaryKeySelective(Question record);
+
+    int updateByPrimaryKeyWithBLOBs(Question record);
+
+    int updateByPrimaryKey(Question record);
 }

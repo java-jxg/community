@@ -1,29 +1,35 @@
 package com.fastcase.community.dto;
 
-import com.fastcase.community.model.User;
-import lombok.Data;
-
-
 public class QuestionDTO {
-    private Integer id;
+    private Long id;
+
     private String title;
-    private String description;
-    private String tag;
+
     private Long gmtCreate;
+
     private Long gmtModified;
+
     private Integer creator;
-    private Integer viewCount;
+
     private Integer commentCount;
+
+    private Integer viewCount;
+
     private Integer likeCount;
 
-    private String avatarUrl;
+    private String tag;
+
+    private String description;
+
     private String name;
 
-    public Integer getId() {
+    private String avatarUrl;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -33,22 +39,6 @@ public class QuestionDTO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
     public Long getGmtCreate() {
@@ -75,20 +65,20 @@ public class QuestionDTO {
         this.creator = creator;
     }
 
-    public Integer getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
-    }
-
     public Integer getCommentCount() {
         return commentCount;
     }
 
     public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 
     public Integer getLikeCount() {
@@ -99,12 +89,20 @@ public class QuestionDTO {
         this.likeCount = likeCount;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getTag() {
+        return tag;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
@@ -113,5 +111,13 @@ public class QuestionDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

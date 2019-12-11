@@ -2,7 +2,6 @@ package com.fastcase.community.controller;
 
 import com.fastcase.community.dto.AccessTokenDTO;
 import com.fastcase.community.dto.GithubUser;
-import com.fastcase.community.mapper.UserMapper;
 import com.fastcase.community.model.User;
 import com.fastcase.community.provider.GithubProvider;
 import com.fastcase.community.service.UserService;

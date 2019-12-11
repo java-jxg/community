@@ -1,6 +1,9 @@
 package com.fastcase.community.service;
 
 import com.fastcase.community.dto.QuestionDTO;
+import com.fastcase.community.exception.CustomizeErrorCode;
+import com.fastcase.community.exception.CustomizeException;
+import com.fastcase.community.mapper.QuestionExMapper;
 import com.fastcase.community.mapper.QuestionMapper;
 import com.fastcase.community.mapper.UserMapper;
 import com.fastcase.community.model.Question;
@@ -17,25 +20,31 @@ public class QuestionService {
     private QuestionMapper questionMapper;
 
     @Autowired
+    private QuestionExMapper questionExMapper;
+
+    @Autowired
     private UserMapper userMapper;
 
     public PageInfo list(Integer page, Integer size) {
 
         PageHelper.startPage(page,size);
-        List<QuestionDTO> questions = questionMapper.list();
+        List<QuestionDTO> questions = questionExMapper.list();
         PageInfo<Question> pageInfo = new PageInfo(questions,5);
         return pageInfo;
     }
-    public PageInfo listByUserId(Integer userId,Integer page, Integer size) {
+    public PageInfo listByUserId(Long userId,Integer page, Integer size) {
 
         PageHelper.startPage(page,size);
-        List<QuestionDTO> questions = questionMapper.listByUserId(userId);
+        List<QuestionDTO> questions = questionExMapper.listByUserId(userId);
         PageInfo<Question> pageInfo = new PageInfo(questions,5);
         return pageInfo;
     }
 
-    public QuestionDTO getById(Integer id) {
-        QuestionDTO questionDTO = questionMapper.getById(id);
+    public QuestionDTO getById(Long id) {
+        QuestionDTO questionDTO = questionExMapper.getById(id);
+        if(questionDTO == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         return questionDTO;
     }
 
@@ -44,11 +53,21 @@ public class QuestionService {
             // 创建
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.create(question);
+            question.setCommentCount(0);
+            question.setViewCount(0);
+            question.setLikeCount(0);
+            questionMapper.insert(question);
         } else {
             // 更新
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.update(question);
+            questionMapper.updateByPrimaryKeyWithBLOBs(question);
         }
+    }
+
+    public void incView(Long id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExMapper.incView(question);
     }
 }
