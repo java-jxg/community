@@ -70,7 +70,7 @@ public class PublishController {
             question.setViewCount(questionDTO.getViewCount());
         }
 
-        question.setCreator(user.getId().intValue());
+        question.setCreator(user.getId());
         questionService.createOrUpdate(question);
         return "redirect:/";
     }

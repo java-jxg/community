@@ -1,13 +1,9 @@
 package com.fastcase.community.mapper;
 
-import com.fastcase.community.dto.QuestionDTO;
-
-import java.util.List;
-
 import com.fastcase.community.model.Question;
 import com.fastcase.community.model.QuestionExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 public interface QuestionMapper {
     int countByExample(QuestionExample example);

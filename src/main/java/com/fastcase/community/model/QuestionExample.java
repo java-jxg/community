@@ -364,52 +364,52 @@ public class QuestionExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatorEqualTo(Integer value) {
+        public Criteria andCreatorEqualTo(Long value) {
             addCriterion("creator =", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorNotEqualTo(Integer value) {
+        public Criteria andCreatorNotEqualTo(Long value) {
             addCriterion("creator <>", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorGreaterThan(Integer value) {
+        public Criteria andCreatorGreaterThan(Long value) {
             addCriterion("creator >", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCreatorGreaterThanOrEqualTo(Long value) {
             addCriterion("creator >=", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorLessThan(Integer value) {
+        public Criteria andCreatorLessThan(Long value) {
             addCriterion("creator <", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorLessThanOrEqualTo(Integer value) {
+        public Criteria andCreatorLessThanOrEqualTo(Long value) {
             addCriterion("creator <=", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorIn(List<Integer> values) {
+        public Criteria andCreatorIn(List<Long> values) {
             addCriterion("creator in", values, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorNotIn(List<Integer> values) {
+        public Criteria andCreatorNotIn(List<Long> values) {
             addCriterion("creator not in", values, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorBetween(Integer value1, Integer value2) {
+        public Criteria andCreatorBetween(Long value1, Long value2) {
             addCriterion("creator between", value1, value2, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorNotBetween(Integer value1, Integer value2) {
+        public Criteria andCreatorNotBetween(Long value1, Long value2) {
             addCriterion("creator not between", value1, value2, "creator");
             return (Criteria) this;
         }

@@ -26,4 +26,6 @@ public interface QuestionExMapper {
 
     @Update("update QUESTION set VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER} where id = #{id}")
     void incView(Question question);
+    @Update("update QUESTION set COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER} where id = #{id}")
+    int incCommentCount(Question record);
 }
