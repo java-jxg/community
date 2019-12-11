@@ -16,4 +16,8 @@ public interface QuestionMapper {
     @Select("SELECT * FROM question q \n" +
             "LEFT JOIN USER u ON q.creator=u.id\n")
     List<QuestionDTO> list();
+    @Select("SELECT * FROM question q\n" +
+            "LEFT JOIN USER u ON q.creator=u.id\n" +
+            "WHERE creator = #{userId}")
+    List<QuestionDTO> listByUserId(@Param("userId") Integer userId);
 }
