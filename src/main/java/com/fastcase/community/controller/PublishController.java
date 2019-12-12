@@ -1,9 +1,11 @@
 package com.fastcase.community.controller;
 
+import com.fastcase.community.cache.TagCache;
 import com.fastcase.community.dto.QuestionDTO;
 import com.fastcase.community.model.Question;
 import com.fastcase.community.model.User;
 import com.fastcase.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ public class PublishController {
         question.setDescription("");
         question.setTag("");
         model.addAttribute("question",question);
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -33,6 +36,7 @@ public class PublishController {
                        Model model) {
         QuestionDTO question = questionService.getById(id);
         model.addAttribute("question",question);
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -43,6 +47,7 @@ public class PublishController {
 
         if(question != null){
             model.addAttribute("question",question);
+            model.addAttribute("tags", TagCache.get());
         }
         if (question.getTitle() == null || question.getTitle() == "") {
             model.addAttribute("error", "标题不能为空");
@@ -54,6 +59,11 @@ public class PublishController {
         }
         if (question.getTag() == null || question.getTag() == "") {
             model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+        String invalid = TagCache.filterInvalid(question.getTag());
+        if (StringUtils.isNotBlank(invalid)) {
+            model.addAttribute("error", "输入非法标签:" + invalid);
             return "publish";
         }
         User user = (User) request.getSession().getAttribute("user");
