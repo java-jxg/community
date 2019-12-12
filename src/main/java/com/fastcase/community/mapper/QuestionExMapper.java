@@ -1,8 +1,10 @@
 package com.fastcase.community.mapper;
 
+import com.fastcase.community.dto.CommentExDTO;
 import com.fastcase.community.dto.QuestionDTO;
+
+import com.fastcase.community.model.Comment;
 import com.fastcase.community.model.Question;
-import com.fastcase.community.model.QuestionExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -28,4 +30,14 @@ public interface QuestionExMapper {
     void incView(Question question);
     @Update("update QUESTION set COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER} where id = #{id}")
     int incCommentCount(Question record);
+
+
+
+
+    @Select("SELECT * FROM COMMENT c\n" +
+            "LEFT JOIN USER u ON c.commentator=u.id\n" +
+            "WHERE c.type=#{type} AND c.parent_id=#{id} order by c.gmt_create desc")
+    List<CommentExDTO> getCommentByParentId(Long id, Integer type);
+    @Update("update comment set COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER} where id = #{parentId}")
+    void incCommentCC(Comment comment);
 }

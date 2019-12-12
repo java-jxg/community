@@ -1,6 +1,6 @@
-package com.fastcase.community.model;
+package com.fastcase.community.dto;
 
-public class Comment {
+public class CommentExDTO {
     private Long id;
 
     private Long parentId;
@@ -18,6 +18,16 @@ public class Comment {
     private String content;
 
     private Integer commentCount;
+
+    private String accountId;
+
+    private String name;
+
+    private String token;
+
+    private String bio;
+
+    private String avatarUrl;
 
     public Long getId() {
         return id;
@@ -80,7 +90,47 @@ public class Comment {
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public Integer getCommentCount() {

@@ -1,6 +1,7 @@
 package com.fastcase.community.service;
 
 import com.fastcase.community.CommentTypeEnum;
+import com.fastcase.community.dto.CommentExDTO;
 import com.fastcase.community.exception.CustomizeErrorCode;
 import com.fastcase.community.exception.CustomizeException;
 import com.fastcase.community.mapper.CommentMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.Transient;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -40,6 +42,10 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            comment.setCommentCount(1);
+            questionExMapper.incCommentCC(comment);
+
+
         } else {
             // 回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -50,5 +56,10 @@ public class CommentService {
             question.setCommentCount(1);
             questionExMapper.incCommentCount(question);
         }
+    }
+
+    public List<CommentExDTO> listByQuestionId(Long id,CommentTypeEnum type) {
+        List<CommentExDTO> comments= questionExMapper.getCommentByParentId(id,type.getType());
+        return comments;
     }
 }
