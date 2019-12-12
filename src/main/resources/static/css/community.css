@@ -35,6 +35,22 @@ body {
     margin-top: 25px;
 }
 
+.question-tag {
+    margin-right: 5px;
+}
+
+.question-related {
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
+.question-wechat {
+    width: 100%;
+}
+
 .community-menu {
     display: block;
     color: #999;
@@ -69,7 +85,7 @@ body {
     margin-bottom: 15px;
 }
 
-.sub-comments .btn{
+.sub-comments .btn {
     margin: 10px 0;
 }
 
@@ -86,6 +102,15 @@ body {
     margin-right: 6px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.menu .comment-icon {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .comment-icon :hover {
+    color: #499ef3;
 }
 
 .menu .active {

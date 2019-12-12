@@ -40,4 +40,7 @@ public interface QuestionExMapper {
     List<CommentExDTO> getCommentByParentId(Long id, Integer type);
     @Update("update comment set COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER} where id = #{parentId}")
     void incCommentCC(Comment comment);
+
+    @Select("select * from QUESTION where id != #{id} and tag regexp #{tag}")
+    List<Question> selectRelated(Question question);
 }
