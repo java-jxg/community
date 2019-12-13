@@ -1,7 +1,6 @@
 package com.fastcase.community.controller;
 
-import com.fastcase.community.CommentTypeEnum;
-import com.fastcase.community.dto.CommentDTO;
+import com.fastcase.community.Enum.CommentTypeEnum;
 import com.fastcase.community.dto.CommentExDTO;
 import com.fastcase.community.dto.QuestionDTO;
 import com.fastcase.community.service.CommentService;

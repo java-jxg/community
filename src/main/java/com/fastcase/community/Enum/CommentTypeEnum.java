@@ -1,4 +1,4 @@
-package com.fastcase.community;
+package com.fastcase.community.Enum;
 
 public enum CommentTypeEnum {
     QUESTION(1),

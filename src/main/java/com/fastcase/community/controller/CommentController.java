@@ -1,6 +1,6 @@
 package com.fastcase.community.controller;
 
-import com.fastcase.community.CommentTypeEnum;
+import com.fastcase.community.Enum.CommentTypeEnum;
 import com.fastcase.community.dto.CommentDTO;
 import com.fastcase.community.dto.CommentExDTO;
 import com.fastcase.community.dto.ResultDTO;
@@ -46,7 +46,7 @@ public class CommentController {
         comment.setCommentator(user.getId());
         comment.setLikeCount(0L);
         comment.setCommentCount(0);
-        commentService.insert(comment);
+        commentService.insert(comment,user);
         return ResultDTO.okOf();
     }
     @ResponseBody
