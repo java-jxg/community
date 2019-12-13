@@ -29,6 +29,7 @@ public class NotificationService {
         NotificationExample example = new NotificationExample();
         example.createCriteria()
                 .andReceiverEqualTo(userId);
+        example.setOrderByClause("gmt_create desc");
 
         PageHelper.startPage(page,size);
         List<Notification> notifications = notificationMapper.selectByExample(example);

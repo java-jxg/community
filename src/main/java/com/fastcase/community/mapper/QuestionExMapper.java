@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface QuestionExMapper {
     @Select("SELECT * FROM question q \n" +
-            "LEFT JOIN USER u ON q.creator=u.id\n")
+            "LEFT JOIN USER u ON q.creator=u.id order by q.gmt_create desc")
     List<QuestionDTO> list();
 
     @Select("SELECT * FROM question q\n" +
