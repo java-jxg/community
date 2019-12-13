@@ -8,14 +8,21 @@ import com.fastcase.community.model.Question;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 public interface QuestionExMapper {
-    @Select("SELECT * FROM question q \n" +
-            "LEFT JOIN USER u ON q.creator=u.id order by q.gmt_create desc")
+    @Select("SELECT * FROM question q\n" +
+            "LEFT JOIN USER u ON q.creator=u.id\n" +
+            "WHERE q.title REGEXP #{search}\n" +
+            "ORDER BY q.gmt_create desc")
+    List<QuestionDTO> listBySearch(String search);
+    @Select("SELECT * FROM question q\n" +
+            "LEFT JOIN USER u ON q.creator=u.id\n" +
+            "ORDER BY q.gmt_create desc")
     List<QuestionDTO> list();
-
     @Select("SELECT * FROM question q\n" +
             "LEFT JOIN USER u ON q.creator=u.id\n" +
             "WHERE creator = #{userId}")

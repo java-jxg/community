@@ -47,27 +47,27 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li th:if="${questionlist.hasPreviousPage}">
-                        <a href="/?page=1" aria-label="Previous">
+                        <a th:href="@{/(page=1,search=${search})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
                     </li>
                     <li th:if="${!questionlist.isFirstPage}">
-                        <a  th:href="@{/(page=${questionlist.pageNum - 1})}"  aria-label="Previous">
+                        <a  th:href="@{/(page=${questionlist.pageNum - 1},search=${search})}"  aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <li th:each="page : ${questionlist.navigatepageNums}" th:class="${questionlist.pageNum == page}? 'active' : ''">
-                        <a th:href="@{/(page=${page})}" th:text="${page}"></a>
+                        <a th:href="@{/(page=${page},search=${search})}" th:text="${page}"></a>
                     </li>
 
                     <li th:if="${!questionlist.isLastPage}">
-                        <a th:href="@{/(page=${questionlist.pageNum +1 })}" aria-label="Previous">
+                        <a th:href="@{/(page=${questionlist.pageNum +1 },search=${search})}" aria-label="Previous">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li th:if="${questionlist.hasNextPage}">
-                        <a th:href="@{/(page=${questionlist.pages})}"  aria-label="Previous">
+                        <a th:href="@{/(page=${questionlist.pages},search=${search})}"  aria-label="Previous">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>

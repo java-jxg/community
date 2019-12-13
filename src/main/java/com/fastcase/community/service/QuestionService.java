@@ -30,10 +30,20 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PageInfo list(Integer page, Integer size) {
+    public PageInfo list(String search, Integer page, Integer size) {
 
         PageHelper.startPage(page,size);
-        List<QuestionDTO> questions = questionExMapper.list();
+        List<QuestionDTO> questions = null;
+        if(search == null){
+            questions = questionExMapper.list();
+        }else{
+            try {
+                questions = questionExMapper.listBySearch(search);
+            }catch (Exception e){
+                throw new CustomizeException(CustomizeErrorCode.FIND_ERROR);
+            }
+        }
+
         PageInfo<Question> pageInfo = new PageInfo(questions,5);
         return pageInfo;
     }

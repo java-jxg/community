@@ -13,6 +13,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     NOTIFICATION_NOT_FOUND(2009, "消息莫非是不翼而飞了？"),
     UPLOAD_IMAGE_TOO_BIG(2010, "文件太大了"),
     IMAGE_UPLOAD_FAILED(2011, "文件上传失败"),
+    FIND_ERROR(2012, "搜索字符不合适"),
     ;
 
 
