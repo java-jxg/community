@@ -5,6 +5,9 @@ import com.fastcase.community.dto.GithubUser;
 import com.fastcase.community.model.User;
 import com.fastcase.community.provider.GithubProvider;
 import com.fastcase.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
     @Autowired
     private GithubProvider githubProvider;
@@ -31,6 +35,8 @@ public class AuthorizeController {
     public String clientUrl;
     @Autowired
     private UserService userService;
+
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
 
     @GetMapping("/callback")
@@ -56,9 +62,11 @@ public class AuthorizeController {
             user.setAvatarUrl(githubUser.getAvatarUrl());
             userService.createOrUpdate(user);
             response.addCookie(new Cookie("token", token));
+
             return "redirect:/";
         } else {
             // 登录失败，重新登录
+            logger.error("callback get github error,{}", githubUser.getId());
             return "redirect:/";
         }
     }
